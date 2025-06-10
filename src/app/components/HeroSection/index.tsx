@@ -15,7 +15,7 @@ const HeroSection = () => {
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
-                Professional Online Counseling That's{' '}
+                Professional Online Counseling That`&apos;`s{' '}
                 <span className="text-green-600">Accessible & Secure</span>{' '}
                 Anytime, Anywhere.
               </h1>
