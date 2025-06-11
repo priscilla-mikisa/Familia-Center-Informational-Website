@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import {Menu,X} from 'lucide-react';
 import Image from "next/image";
+import Link from 'next/link';
 
 
 const Header = () => {
@@ -35,12 +36,16 @@ const Header = () => {
             </nav>
 
             <div className="hidden md:flex space-x-4">
+              <Link href='/components/LogInPage'>
               <button className="px-4 py-2 text-green-600 border border-green-600 rounded-lg hover:bg-green-50">
                 Sign In
               </button>
+              </Link>
+              <Link href='/components/Sign-Up-Page'>
               <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
                 Get Started
               </button>
+              </Link>
             </div>
 
             {/* Mobile menu button */}

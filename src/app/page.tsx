@@ -9,7 +9,7 @@ import CTA from './components/CallToActionSection';
 import Programs from './components/ProgramsSection';
 import Types from './components/UsersOptions';
 
-const FamiliaCenterWebsite = () => {
+const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
@@ -41,4 +41,4 @@ const FamiliaCenterWebsite = () => {
   );
 };
 
-export default FamiliaCenterWebsite;
+export default Home;
