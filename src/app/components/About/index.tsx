@@ -26,8 +26,8 @@ const About = () => {
                     <Shield className="w-6 h-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Secure & Private</h3>
-                    <p className="text-gray-600">End-to-end encryption and strict privacy controls protect your personal information and counseling sessions.</p>
+                    <h3 className="font-semibold text-gray-900 mb-2">Purpose</h3>
+                    <p className="text-gray-600">In a society that is embracing rapidly changing values, it is our purpose to lay a strong Godly foundation for new families to enjoy closeness and feel loved, supported, and respected while providing established families with access to credible, spiritual and professional support to navigate emerging challenges with openness and dependability.</p>
                   </div>
                 </div>
                 
@@ -36,8 +36,8 @@ const About = () => {
                     <UserCheck className="w-6 h-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Professional Counselors</h3>
-                    <p className="text-gray-600">Licensed mental health professionals with expertise in family counseling, relationships, and personal development.</p>
+                    <h3 className="font-semibold text-gray-900 mb-2">Objective</h3>
+                    <p className="text-gray-600">We want to provide upcoming families with clear Godly purpose, existing families with cherished strength and struggling families with lasting healing.</p>
                   </div>
                 </div>
                 
@@ -61,7 +61,7 @@ const About = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
                   <p className="text-gray-600 mb-6">
-                    To make professional counseling and mental health support accessible, affordable, and effective for families everywhere through innovative technology and compassionate care.
+                  To make professional spiritual guidance and support accessible, affordable, and effective for families everywhere through innovative technology and compassionate care.
                   </p>
                   <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200">
                     <div className="text-center">

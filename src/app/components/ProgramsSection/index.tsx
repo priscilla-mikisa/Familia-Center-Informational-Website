@@ -4,19 +4,16 @@ const Programs = () => {
     const programs = [
         {
           title: "Parenting Excellence",
-          duration: "6 weeks",
           description: "Comprehensive parenting strategies and child development guidance",
           topics: ["Child Psychology", "Discipline Techniques", "Communication", "Emotional Intelligence"]
         },
         {
           title: "Marriage & Relationships",
-          duration: "6 weeks", 
           description: "Strengthen bonds and improve communication in relationships",
           topics: ["Communication Skills", "Conflict Resolution", "Intimacy", "Trust Building"]
         },
         {
           title: "Addiction Recovery",
-          duration: "6 weeks",
           description: "Evidence-based approach to addiction recovery and mental wellness",
           topics: ["Recovery Strategies", "Relapse Prevention", "Support Systems", "Healthy Coping"]
         }
@@ -27,10 +24,10 @@ const Programs = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Structured 6-Week Programs
+              Structured Programs
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive programs designed by mental health professionals to address specific life challenges and promote personal growth.
+              Comprehensive programs designed by professionals to address specific life challenges and promote family or personal growth.
             </p>
           </div>
 
@@ -40,9 +37,6 @@ const Programs = () => {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-xl font-bold text-gray-900">{program.title}</h3>
-                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                      {program.duration}
-                    </span>
                   </div>
                   <p className="text-gray-600 mb-6">{program.description}</p>
                   <div className="space-y-2">

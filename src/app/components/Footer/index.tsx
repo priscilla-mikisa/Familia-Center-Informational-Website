@@ -50,7 +50,7 @@ const Footer = () => {
           <h3 className="font-semibold mb-4">Contact</h3>
           <ul className="space-y-2 text-gray-400">
             <li>support@familiacenter.com</li>
-            <li>1-800-FAMILIA-1</li>
+            <li>+254 754235890</li>
             <li>24/7 Support Available</li>
           </ul>
         </div>
