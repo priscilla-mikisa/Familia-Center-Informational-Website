@@ -23,7 +23,7 @@ const Header = () => {
                   className="text-white" 
                  />
               </div>
-              <span className="text-xl font-bold text-gray-900">Familia Center</span>
+              <span className="text-xl font-bold text-gray-900">FamiSpace</span>
             </div>
             
             {/* Desktop Navigation */}

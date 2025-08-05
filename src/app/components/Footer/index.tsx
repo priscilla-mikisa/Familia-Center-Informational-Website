@@ -19,7 +19,7 @@ const Footer = () => {
                height={50}
                />
             </div>
-            <span className="text-xl font-bold">Familia Center</span>
+            <span className="text-xl font-bold">FamiSpace</span>
           </div>
           <p className="text-gray-400 mb-4">
             Professional counseling and educational services through our secure online platform.
@@ -57,7 +57,7 @@ const Footer = () => {
       </div>
       
       <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-        <p>&copy; 2025 Familia Center Platform. All rights reserved.</p>
+        <p>&copy; 2025 FamiSpace Platform. All rights reserved.</p>
       </div>
     </div>
   </footer>

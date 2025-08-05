@@ -1,67 +1,88 @@
 'use client';
-
-import { BookOpen, Calendar, Cloud, Shield, Users, Video } from "lucide-react";
-
+import { BookOpen, Shield, Users, Video, Download, Lock } from "lucide-react";
 
 const Features = () => {
-    const features = [
-        {
-          icon: <Video className="w-6 h-6" />,
-          title: "Live & Recorded Sessions",
-          description: "Join live counseling sessions via Google Meet or access recorded sessions anytime with proper access control."
-        },
-        {
-          icon: <Users className="w-6 h-6" />,
-          title: "Multiple User Types",
-          description: "Tailored experiences for individuals, couples, and anonymous users with customized dashboards."
-        },
-        {
-          icon: <Calendar className="w-6 h-6" />,
-          title: "Session Booking",
-          description: "Easy scheduling system with counselor selection, payment processing, and automated reminders."
-        },
-        {
-          icon: <Shield className="w-6 h-6" />,
-          title: "Private & Anonymous",
-          description: "Secure, encrypted platform with options for complete anonymity and privacy protection."
-        },
-        {
-          icon: <Cloud className="w-6 h-6" />,
-          title: "Cloud-Based Access",
-          description: "Access your sessions and content from any device, anywhere with secure cloud storage."
-        },
-        {
-          icon: <BookOpen className="w-6 h-6" />,
-          title: "Teaching Modules",
-          description: "Structured 6-week programs with progress tracking, assignments, and downloadable resources."
-        }
-      ];
-  
+  const features = [
+    {
+      icon: <BookOpen className="w-5 h-5" />,
+      title: "Structured Programs",
+      description: "6-12 week guided courses with weekly lessons and exercises",
+      type: "Educational"
+    },
+    {
+      icon: <Video className="w-5 h-5" />,
+      title: "Live Guidance Sessions",
+      description: "Interactive Q&A with family experts via secure video",
+      type: "Interactive"  
+    },
+    {
+      icon: <Download className="w-5 h-5" />,
+      title: "Resource Library",
+      description: "On-demand videos, worksheets, and reading materials",
+      type: "Self-Paced"
+    },
+    {
+      icon: <Users className="w-5 h-5" />,
+      title: "Multiple Formats",
+      description: "Choose between self-study, group cohorts, or private sessions",
+      type: "Flexible"
+    },
+    {
+      icon: <Shield className="w-5 h-5" />,
+      title: "Faith-Based Approach",
+      description: "Biblical principles integrated with professional expertise",
+      type: "Spiritual"
+    },
+    {
+      icon: <Lock className="w-5 h-5" />,
+      title: "Complete Privacy",
+      description: "Anonymous participation options available",
+      type: "Secure"
+    }
+  ];
+
   return (
     <section id="features" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Comprehensive Counseling Platform
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our platform combines cutting-edge technology with professional counseling services to provide accessible, secure, and effective mental health support.
-            </p>
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            Our Comprehensive Support Platform
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Designed to meet families wherever they are in their journey
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 mb-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, index) => (
+            <div key={index} className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow hover:border-green-100">
+              <div className="flex items-start space-x-4">
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                  feature.type === "Educational" ? "bg-blue-100 text-blue-600" :
+                  feature.type === "Interactive" ? "bg-purple-100 text-purple-600" :
+                  feature.type === "Spiritual" ? "bg-green-100 text-green-600" :
+                  "bg-gray-100 text-gray-600"
+                }`}>
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">{feature.title}</h3>
+                  <p className="text-gray-600 text-sm">{feature.description}</p>
+                  <span className={`inline-block mt-2 text-xs px-2 py-1 rounded-full ${
+                    feature.type === "Educational" ? "bg-blue-50 text-blue-600" :
+                    feature.type === "Interactive" ? "bg-purple-50 text-purple-600" :
+                    feature.type === "Spiritual" ? "bg-green-50 text-green-600" :
+                    "bg-gray-50 text-gray-600"
+                  }`}>
+                    {feature.type}
+                  </span>
+                </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
   );
 }
 export default Features;
