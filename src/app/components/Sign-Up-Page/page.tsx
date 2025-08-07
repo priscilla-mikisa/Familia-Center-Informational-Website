@@ -1,8 +1,13 @@
 'use client'
 import { useState } from 'react';
-import { ArrowRight, User, Mail, Lock, ShieldCheck } from 'lucide-react';
+import { ArrowRight, User, Mail, Lock, ShieldCheck, X } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { signUp } from '@/app/api/auth';
+import { validateSignUpForm } from '@/app/utils/validation';
 
 const SignUpPage = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,6 +18,8 @@ const SignUpPage = () => {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -24,50 +31,67 @@ const SignUpPage = () => {
     }));
   };
 
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-    
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
-    }
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
-    }
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
-    }
-    if (!formData.agreeToTerms) newErrors.agreeToTerms = 'You must agree to the terms';
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      // Submit logic here
-      console.log('Form submitted:', formData);
-      // Redirect or show success message
+    setErrors({});
+    setSuccessMessage('');
+    
+    const validationErrors = validateSignUpForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const response = await signUp({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        userType: formData.userType
+      });
+      
+      setSuccessMessage('Account created successfully! Redirecting...');
+      // Redirect to dashboard or verification page
+      // router.push('/verify-email');
+    } catch (error: any) {
+      setErrors({
+        submit: error.message || 'Failed to create account. Please try again.'
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4 relative">
+      {/* Close Button */}
+      <Link href="/" className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-200 transition-colors">
+        <X className="w-6 h-6 text-gray-600" />
+      </Link>
+
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
-        <div className="bg-green-600 p-6 text-center">
+        <div className="bg-green-600 p-6 text-center relative">
           <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
             <User className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-white">Create Your Account</h1>
-          <p className="text-green-100 mt-2">Join our family counseling platform</p>
+          <h1 className="text-2xl font-bold text-white">Join Our Community</h1>
+          <p className="text-green-100 mt-2">Create your account to access family support resources</p>
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 sm:p-8">
+          {errors.submit && (
+            <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-lg text-sm">
+              {errors.submit}
+            </div>
+          )}
+          
+          {successMessage && (
+            <div className="mb-4 p-3 bg-green-50 text-green-600 rounded-lg text-sm">
+              {successMessage}
+            </div>
+          )}
+
           <div className="space-y-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -165,7 +189,7 @@ const SignUpPage = () => {
 
             <div>
               <label htmlFor="userType" className="block text-sm font-medium text-gray-700 mb-1">
-                I am signing up as
+                Account Type
               </label>
               <select
                 id="userType"
@@ -176,7 +200,8 @@ const SignUpPage = () => {
               >
                 <option value="individual">Individual</option>
                 <option value="couple">Couple</option>
-                <option value="anonymous">Anonymous User</option>
+                <option value="family">Family</option>
+                <option value="anonymous">Anonymous</option>
               </select>
             </div>
 
@@ -211,15 +236,30 @@ const SignUpPage = () => {
 
           <button
             type="submit"
-            className="w-full mt-6 px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 flex items-center justify-center"
+            disabled={isLoading}
+            className={`w-full mt-6 px-6 py-3 ${
+              isLoading ? 'bg-green-500' : 'bg-green-600'
+            } text-white font-medium rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 flex items-center justify-center`}
           >
-            Create Account <ArrowRight className="w-5 h-5 ml-2" />
+            {isLoading ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Creating Account...
+              </>
+            ) : (
+              <>
+                Create Account <ArrowRight className="w-5 h-5 ml-2" />
+              </>
+            )}
           </button>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{' '}
-              <a href="/components/LogInPage" className="text-green-600 font-medium hover:underline">
+              <a href="/login" className="text-green-600 font-medium hover:underline">
                 Sign in
               </a>
             </p>
